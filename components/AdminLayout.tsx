@@ -1,9 +1,13 @@
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout } from 'antd';
 import { observer, inject } from 'mobx-react';
-import Head from 'next/head'
-const { SubMenu } = Menu;
-const { Header, Sider, Content } = Layout;
 import { Store } from '../mobx/store'
+import Head from 'next/head'
+import moment from 'moment'
+import SideBar from '../components/SideBar'
+import BreadCrumb from '../components/BreadCrumb'
+import HeaderLayout from '../components/HeaderLayout'
+
+const { Content } = Layout;
 
 interface AdminLayoutProps {
   children: any;
@@ -11,87 +15,25 @@ interface AdminLayoutProps {
   title?: string;
 }
 
-
 import React from 'react'
 @inject('store') @observer
+// @inject('crud-store') @observer
 class AdminLayout extends React.Component<AdminLayoutProps> {
   render() {
     const { title, store, children } = this.props;
+    let lastUpdateFormatDate = moment.unix(store.lastUpdate / 1000).format("MM/DD/YYYY HH:mm:ss")
+
     return <Layout>
       <Head>
         <title>{title}</title>
         <meta charSet='utf-8' />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <Header className="header">
-        <div className="logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          style={{ lineHeight: '64px' }}
-        >
-          <Menu.Item key="1">Sales</Menu.Item>
-          <Menu.Item key="2">Marketing</Menu.Item>
-          <Menu.Item key="3">Customer</Menu.Item>
-        </Menu>
-      </Header>
+      <HeaderLayout />
       <Layout className="ant-layout-has-sider">
-        <Sider width={200} style={{ background: '#fff' }}>
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            style={{ height: '100%', borderRight: 0 }}
-          >
-            <SubMenu
-              key="sub1"
-              title={
-                <span>
-                  <Icon type="user" />
-                  Security
-                </span>
-              }
-            >
-              <Menu.Item key="1">Users</Menu.Item>
-              <Menu.Item key="2">Roles</Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub2"
-              title={
-                <span>
-                  <Icon type="laptop" />
-                  subnav 2
-                </span>
-              }
-            >
-              <Menu.Item key="5">option5</Menu.Item>
-              <Menu.Item key="6">option6</Menu.Item>
-              <Menu.Item key="7">option7</Menu.Item>
-              <Menu.Item key="8">option8</Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub3"
-              title={
-                <span>
-                  <Icon type="notification" />
-                  subnav 3
-                </span>
-              }
-            >
-              <Menu.Item key="9">option9</Menu.Item>
-              <Menu.Item key="10">option10</Menu.Item>
-              <Menu.Item key="11">option11</Menu.Item>
-              <Menu.Item key="12">option12</Menu.Item>
-            </SubMenu>
-          </Menu>
-        </Sider>
+        <SideBar />
         <Layout style={{ padding: '0 24px 24px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
+          <BreadCrumb />
           <Content
             style={{
               background: '#fff',
@@ -100,7 +42,7 @@ class AdminLayout extends React.Component<AdminLayoutProps> {
               minHeight: 280,
             }}
           >
-            {store.lastUpdate}
+            {lastUpdateFormatDate}
             {children}
           </Content>
         </Layout>

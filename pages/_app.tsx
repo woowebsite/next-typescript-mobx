@@ -1,6 +1,6 @@
 import App, {Container} from 'next/app'
 import React from 'react'
-import withMobxStore from '../mobx/with-mobx-store'
+import withMobxStore1 from '../mobx/with-mobx-store'
 import { Provider } from 'mobx-react'
 
 interface Props {
@@ -21,4 +21,4 @@ class MyApp extends App<Props> {
   }
 }
 
-export default withMobxStore(MyApp)
+export default withMobxStore1(MyApp)
