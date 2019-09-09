@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`With Snapshot Testing App has link About 1`] = `
+<div>
+  <header>
+    <nav>
+      <a
+        href="/"
+        onClick={[Function]}
+      >
+        Home
+      </a>
+       |
+       
+      <a
+        href="/about"
+        onClick={[Function]}
+      >
+        About
+      </a>
+    </nav>
+  </header>
+  <h1>
+    Hello Next.js 👋
+  </h1>
+  <p>
+    <a
+      href="/about"
+      onClick={[Function]}
+    >
+      About
+    </a>
+  </p>
+  <footer>
+    I'm here to stay
+  </footer>
+</div>
+`;
