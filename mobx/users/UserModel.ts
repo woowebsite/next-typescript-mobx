@@ -18,7 +18,9 @@ class User implements IUser {
     sex: boolean;
     status: string;
     birthday: Date;
-    getFullName: () => `${this.firstName} ${this.lastName}`;
+    getFullName() {
+        return `${this.firstName} ${this.lastName}`
+    };
 
     constructor(firstName: string, lastName: string) {
         this.firstName = firstName;

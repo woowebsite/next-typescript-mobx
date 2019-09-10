@@ -1,9 +1,9 @@
-import { IBaseService } from "../../base/services/IBaseService";
 import User from "./UserModel";
+import IUserService from './IUserService'
+import axios, {AxiosResponse} from 'axios';
 
-export class UserService implements IBaseService {
-    getAll(): User[] {
-        return []
+export default class UserService extends IUserService {
+    getUserByUsername = (username: string): Promise<AxiosResponse<User>> => {
+        return axios.get<User, AxiosResponse<User>>(username)
     }
 }
-    
