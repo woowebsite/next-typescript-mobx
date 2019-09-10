@@ -1,24 +1,29 @@
 import App, {Container} from 'next/app'
 import React from 'react'
-import withMobxStore1 from '../mobx/with-mobx-store'
+import { Store } from '../mobx/store'
+import { CrudStore } from '../mobx/crud-store'
+import withMobxStore from '../mobx/with-mobx-store'
 import { Provider } from 'mobx-react'
 
 interface Props {
   mobxStore: any
 }
-
 class MyApp extends App<Props> {
   render () {
-    const {Component, pageProps, mobxStore} = this.props
+    const rootStores = { 
+      originStore: new Store(),
+      crudStore: new CrudStore()
+    }
+    const {Component, mobxStore} = this.props
     
     return (
       <Container>
         <Provider store={mobxStore}>
-          <Component {...pageProps} />
+          <Component {...rootStores} />
         </Provider>
       </Container>
     )
   }
 }
 
-export default withMobxStore1(MyApp)
+export default withMobxStore(MyApp)

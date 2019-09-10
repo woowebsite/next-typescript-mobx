@@ -12,6 +12,8 @@ const { Content } = Layout;
 interface AdminLayoutProps {
   children: any;
   store: Store;
+  originStore?: any;
+  crudStore?: any;
   title?: string;
 }
 
@@ -20,8 +22,10 @@ import React from 'react'
 // @inject('crud-store') @observer
 class AdminLayout extends React.Component<AdminLayoutProps> {
   render() {
-    const { title, store, children } = this.props;
-    let lastUpdateFormatDate = moment.unix(store.lastUpdate / 1000).format("MM/DD/YYYY HH:mm:ss")
+    console.log("this.props: ", this.props);
+    
+    const { title, originStore, crudStore, children } = this.props;
+    let lastUpdateFormatDate = originStore ? moment.unix(originStore.lastUpdate / 1000).format("MM/DD/YYYY HH:mm:ss") : `The time is underfined`
 
     return <Layout>
       <Head>

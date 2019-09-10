@@ -26,7 +26,7 @@ const SideBar: React.SFC<Props> = () => (
                 </span>
         }
       >
-        <Item key="1"><Link href="/users">Users</Link></Item>
+        <Item key="1"><Link href="/users"><a>Users</a></Link></Item>
         <Item key="2">Roles</Item>
       </SubMenu>
       <SubMenu
